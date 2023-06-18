@@ -19,25 +19,19 @@
 			<h1>
 				<pre>
 
-//method 1
-str = 'abcadeecfb';
-strArr = str.split('');
-for (let i = 0; i < strArr.length - 1; i++) {
-	for (let j = i + 1; j < strArr.length; j++) {
-		if (strArr[i] == strArr[j]) {
-			strArr.splice(j, 1);
-			j--;
-		}
-	}
-}
-console.log(strArr.join(''));
+let parent = {
+	display: function () {
+		console.log('Welcome!!!');
+	},
+};
 
+let child = Object.create(parent);
+child.name = function () {
+	console.log('I am Child Object');
+};
 
-
-
-//method 2
-strSet = new Set([...str]);
-console.log(...strSet);
+child.name();
+child.display();	
 				</pre
 				>
 			</h1>
@@ -46,58 +40,37 @@ console.log(...strSet);
 		<div class="ques">
 			<h3>2. Write code to explain prototype chaining</h3>
 			<h1>
+				Prototype chaining is a mechanism in JavaScript that allows objects to
+				inherit properties and methods from other objects. When a property or
+				method is accessed on an object, JavaScript will first look for it
+				directly on the object. If it doesn't find it, it will continue the
+				search on the object's prototype, and so on, creating a chain of
+				prototypes until the property or method is found or the end of the chain
+				is reached.
+
 				<pre>
 
-//method 1
-let str = 'abcadeecfb';
-let map = new Map();
-for (let i = 0; i < str.length; i++) {
-	if (map.has(str[i])) {
-		let value = map.get(str[i]);
-		map.set(str[i], value + 1);
-	} else {
-		map.set(str[i], 1);
-	}
+function car(wheel, engine) {
+	this.wheel = wheel;
+	this.engine = engine;
 }
-for (let [k, v] of map) {
-	console.log(k + '=' + v);
+car.prototype.start = function () {
+	console.log('This care starts');
+};
+
+function swift(wheel, engine) {
+	car.call(this, wheel, engine);
 }
 
+swift.prototype = Object.create(car.prototype);
 
-
-
-
-//method 2
-function countAlphabets(str) {
-	const alphabetCount = {};
-	for (let char of str) {
-		if (char in alphabetCount) alphabetCount[char]++;
-		else alphabetCount[char] = 1;
-	}
-	for (let char in alphabetCount) {
-		console.log(`${char} = ${alphabetCount[char]}`);
-	}
-}
-countAlphabets('abcadeecfb');
-
-
-
-
-
-
-//method 3
-function countAlphabets(str) {
-	const alphabetCount = new Map();
-	for (let char of str) {
-		if (alphabetCount.has(char))
-			alphabetCount.set(char, alphabetCount.get(char) + 1);
-		else alphabetCount.set(char, 1);
-	}
-	for (let [char, count] of alphabetCount) {
-		console.log(`${char} = ${count}`);
-	}
-}
-countAlphabets('abcadeecfb');
+swift.prototype.drive = function () {
+	console.log('This car is driving');
+};
+const myswift = new swift(4, '1.4l');
+myswift.start();
+myswift.drive();
+console.log(myswift);				
 				</pre
 				>
 			</h1>
@@ -111,25 +84,23 @@ countAlphabets('abcadeecfb');
 			<h1>
 				<pre>
 
-//method 1
-str = 'abcadeecfb';
-strArr = str.split('');
-for (let i = 0; i < strArr.length - 1; i++) {
-	for (let j = i + 1; j < strArr.length; j++) {
-		if (strArr[i] == strArr[j]) {
-			strArr.splice(j, 1);
-			j--;
-		}
+Array.prototype.calculateSum = function () {
+	var sum = 0;
+	for (var i = 0; i < this.length; i++) {
+		sum += this[i];
 	}
-}
-console.log(strArr.join(''));
+	return sum;
+};
 
+var array1 = [1, 2, 3, 4, 5];
+var array2 = [10, 20, 30];
 
+var sum1 = array1.calculateSum();
+var sum2 = array2.calculateSum();
 
+console.log(sum1);
+console.log(sum2);
 
-//method 2
-strSet = new Set([...str]);
-console.log(...strSet);
 				</pre
 				>
 			</h1>
@@ -143,25 +114,39 @@ console.log(...strSet);
 			<h1>
 				<pre>
 
-//method 1
-str = 'abcadeecfb';
-strArr = str.split('');
-for (let i = 0; i < strArr.length - 1; i++) {
-	for (let j = i + 1; j < strArr.length; j++) {
-		if (strArr[i] == strArr[j]) {
-			strArr.splice(j, 1);
-			j--;
+function getAllPropertyNames(obj) {
+	var propertyNames = [];
+	
+	for (var prop in obj) {
+		if (obj.hasOwnProperty(prop)) {
+			propertyNames.push(prop);
 		}
 	}
+	
+	var prototype = Object.getPrototypeOf(obj);
+	if (prototype !== null) {
+		var inheritedPropertyNames = getAllPropertyNames(prototype);
+		propertyNames = propertyNames.concat(inheritedPropertyNames);
+	}
+
+	return propertyNames;
 }
-console.log(strArr.join(''));
 
+var obj = {
+	name: 'John',
+	age: 30,
+};
 
+function Person() {
+	this.gender = 'Male';
+}
+Person.prototype = obj;
 
+var person = new Person();
+person.city = 'New York';
 
-//method 2
-strSet = new Set([...str]);
-console.log(...strSet);
+var propertyNames = getAllPropertyNames(person);
+console.log(propertyNames);
 				</pre
 				>
 			</h1>
