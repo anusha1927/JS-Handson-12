@@ -1,0 +1,24 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+body {
+	background-color: bisque;
+}
+body > h1 {
+	text-align: center;
+	margin: 10px;
+	color: chocolate;
+	text-decoration: underline;
+}
+.ques {
+	margin: 20px;
+}
+.ques > h3 {
+	color: blueviolet;
+	margin-bottom: 10px;
+}
+pre {
+	color: crimson;
+}

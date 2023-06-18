@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Asssignment-12 Inheritance and Prototype</title>
+		<link rel="stylesheet" href="./index.css" />
+	</head>
+	<body>
+		<h1>INHERITANCE and PROTOTYPE</h1>
+		<hr />
+		<hr />
+		<div class="ques">
+			<h3>
+				1. Create 2 objects - parent and child. Attach methods to parent and use
+				those methods in child object using parents prototype
+			</h3>
+			<h1>
+				<pre>
+
+//method 1
+str = 'abcadeecfb';
+strArr = str.split('');
+for (let i = 0; i < strArr.length - 1; i++) {
+	for (let j = i + 1; j < strArr.length; j++) {
+		if (strArr[i] == strArr[j]) {
+			strArr.splice(j, 1);
+			j--;
+		}
+	}
+}
+console.log(strArr.join(''));
+
+
+
+
+//method 2
+strSet = new Set([...str]);
+console.log(...strSet);
+				</pre
+				>
+			</h1>
+		</div>
+		<hr />
+		<div class="ques">
+			<h3>2. Write code to explain prototype chaining</h3>
+			<h1>
+				<pre>
+
+//method 1
+let str = 'abcadeecfb';
+let map = new Map();
+for (let i = 0; i < str.length; i++) {
+	if (map.has(str[i])) {
+		let value = map.get(str[i]);
+		map.set(str[i], value + 1);
+	} else {
+		map.set(str[i], 1);
+	}
+}
+for (let [k, v] of map) {
+	console.log(k + '=' + v);
+}
+
+
+
+
+
+//method 2
+function countAlphabets(str) {
+	const alphabetCount = {};
+	for (let char of str) {
+		if (char in alphabetCount) alphabetCount[char]++;
+		else alphabetCount[char] = 1;
+	}
+	for (let char in alphabetCount) {
+		console.log(`${char} = ${alphabetCount[char]}`);
+	}
+}
+countAlphabets('abcadeecfb');
+
+
+
+
+
+
+//method 3
+function countAlphabets(str) {
+	const alphabetCount = new Map();
+	for (let char of str) {
+		if (alphabetCount.has(char))
+			alphabetCount.set(char, alphabetCount.get(char) + 1);
+		else alphabetCount.set(char, 1);
+	}
+	for (let [char, count] of alphabetCount) {
+		console.log(`${char} = ${count}`);
+	}
+}
+countAlphabets('abcadeecfb');
+				</pre
+				>
+			</h1>
+		</div>
+		<hr />
+		<div class="ques">
+			<h3>
+				3. Add a method to calculate sum of all elements in Array in array's
+				protype, use that method to calculate sum for multiple arrays
+			</h3>
+			<h1>
+				<pre>
+
+//method 1
+str = 'abcadeecfb';
+strArr = str.split('');
+for (let i = 0; i < strArr.length - 1; i++) {
+	for (let j = i + 1; j < strArr.length; j++) {
+		if (strArr[i] == strArr[j]) {
+			strArr.splice(j, 1);
+			j--;
+		}
+	}
+}
+console.log(strArr.join(''));
+
+
+
+
+//method 2
+strSet = new Set([...str]);
+console.log(...strSet);
+				</pre
+				>
+			</h1>
+		</div>
+		<hr />
+		<div class="ques">
+			<h3>
+				4. Write a JavaScript function to retrieve all the names of object's own
+				and inherited properties.
+			</h3>
+			<h1>
+				<pre>
+
+//method 1
+str = 'abcadeecfb';
+strArr = str.split('');
+for (let i = 0; i < strArr.length - 1; i++) {
+	for (let j = i + 1; j < strArr.length; j++) {
+		if (strArr[i] == strArr[j]) {
+			strArr.splice(j, 1);
+			j--;
+		}
+	}
+}
+console.log(strArr.join(''));
+
+
+
+
+//method 2
+strSet = new Set([...str]);
+console.log(...strSet);
+				</pre
+				>
+			</h1>
+		</div>
+		<script src="./index.js"></script>
+	</body>
+</html>
